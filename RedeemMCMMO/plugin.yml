@@ -1,0 +1,43 @@
+name: RedeemMCMMO
+main: com.flapfactions.redeemMCMMO.main
+version: 1.1.3
+author: Candybuddy
+description: A plugin that allows players to redeem MCMMO levels in any skill.
+depend: [Vault]
+depend: [mcMMO]
+commands:
+  addcredits:
+    description: Give a player credits towards MCMMO levels.
+    usage: /addcredits <player> <amount>
+    permission: redeemMCMMO.addcredits
+    permission-message: You do not have permission to use this command.
+  takecredits:
+    description: Takes credits from a player.
+    usage: /takecredits <player> <amount>
+    permission: redeemMCMMO.takecredits
+    permission-message: You do not have permission to use this command.
+  buycredits:
+    description: Buy credits.
+    usage: /buycredits <amount>
+    permission: redeemMCMMO.buycredits
+    permission-message: You do not have permission to use this command.
+  credits:
+    description: Shows the amount of credits you have.
+    usage: /credits [player]
+    permission: redeemMCMMO.credits
+    permission-message: You do not have permission to use this command.
+  rmreload:
+    description: Reloads the config file.
+    usage: /rmreload
+    permission: redeemMCMMO.rmreload
+    permission-message: You do not have permission to use this command.
+  redeem:
+    description: Redeem mcmmo levels from your credits.
+    usage: /redeem <skill> <amount>
+    permission: redeemMCMMO.redeem
+    permission-message: You do not have permission to use this command.
+  rmhelp:
+    description: Veiw a list of commands for redeemMCMMO.
+    usage: /rmhelp
+    permission: redeemMCMMO.rmhelp
+    permission-message: You do not have permission to use this command.
