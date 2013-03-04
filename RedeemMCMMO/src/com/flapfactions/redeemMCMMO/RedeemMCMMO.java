@@ -17,8 +17,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.nossr50.api.ExperienceAPI;
-import com.gmail.nossr50.config.Config;
-import com.gmail.nossr50.datatypes.skills.SkillType;
 
 public class RedeemMCMMO extends JavaPlugin {
 	private static final Logger log = Logger.getLogger("Minecraft");
@@ -192,7 +190,6 @@ public class RedeemMCMMO extends JavaPlugin {
 			} else if(args.length == 2) {
 				String skillType = args[0];
 				int cap = 0;
-				Config mcMMOConfig = Config.getInstance();
 
 				if (skillType.equalsIgnoreCase("taming")
 				        || skillType.equalsIgnoreCase("swords")
@@ -206,7 +203,7 @@ public class RedeemMCMMO extends JavaPlugin {
 				        || skillType.equalsIgnoreCase("herbalism")
 				        || skillType.equalsIgnoreCase("repair")
 				        || skillType.equalsIgnoreCase("woodcutting")) {
-                    cap = mcMMOConfig.getLevelCap(SkillType.getSkill(skillType));
+                    cap = ExperienceAPI.getLevelCap(skillType);
 				}
 				else {
                     player.sendMessage(ChatColor.RED + skillType + " is not a valid skill!");
