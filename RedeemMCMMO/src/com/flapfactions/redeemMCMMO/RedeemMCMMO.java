@@ -20,10 +20,10 @@ import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.config.Config;
 import com.gmail.nossr50.skills.utilities.SkillType;
 
-public class main extends JavaPlugin {
+public class RedeemMCMMO extends JavaPlugin {
 	private static final Logger log = Logger.getLogger("Minecraft");
 	public final playerListener pl = new playerListener();
-	public static main instance;
+	public static RedeemMCMMO instance;
 	public static Economy econ = null;
 	
 	@Override
