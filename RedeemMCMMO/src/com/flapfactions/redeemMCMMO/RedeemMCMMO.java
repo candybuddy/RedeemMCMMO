@@ -17,13 +17,11 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.nossr50.api.ExperienceAPI;
-import com.gmail.nossr50.config.Config;
-import com.gmail.nossr50.skills.utilities.SkillType;
 
-public class main extends JavaPlugin {
+public class RedeemMCMMO extends JavaPlugin {
 	private static final Logger log = Logger.getLogger("Minecraft");
 	public final playerListener pl = new playerListener();
-	public static main instance;
+	public static RedeemMCMMO instance;
 	public static Economy econ = null;
 	
 	@Override
@@ -190,62 +188,26 @@ public class main extends JavaPlugin {
 			if(args.length <= 1) {
 				player.sendMessage(ChatColor.RED + "Too little arguments!");
 			} else if(args.length == 2) {
-				String skill = args[0];
-				Config mc = Config.getInstance();
-				SkillType skilltype = null;
+				String skillType = args[0];
 				int cap = 0;
-				if(skill.equalsIgnoreCase("taming")){
-					skilltype = SkillType.TAMING;
-					cap=mc.getLevelCapTaming();
+
+				if (skillType.equalsIgnoreCase("taming")
+				        || skillType.equalsIgnoreCase("swords")
+				        || skillType.equalsIgnoreCase("unarmed")
+				        || skillType.equalsIgnoreCase("archery")
+				        || skillType.equalsIgnoreCase("axes")
+				        || skillType.equalsIgnoreCase("acrobatics")
+				        || skillType.equalsIgnoreCase("fishing")
+				        || skillType.equalsIgnoreCase("excavation")
+				        || skillType.equalsIgnoreCase("mining")
+				        || skillType.equalsIgnoreCase("herbalism")
+				        || skillType.equalsIgnoreCase("repair")
+				        || skillType.equalsIgnoreCase("woodcutting")) {
+                    cap = ExperienceAPI.getLevelCap(skillType);
 				}
-				if(skill.equalsIgnoreCase("swords")){
-					skilltype = SkillType.SWORDS;
-					cap=mc.getLevelCapSwords();
-				}
-				if(skill.equalsIgnoreCase("unarmed")){
-					skilltype = SkillType.UNARMED;
-					cap=mc.getLevelCapUnarmed();
-				}
-				if(skill.equalsIgnoreCase("archery")){
-					skilltype = SkillType.ARCHERY;
-					cap=mc.getLevelCapArchery();
-				}
-				if(skill.equalsIgnoreCase("axes")){
-					skilltype = SkillType.AXES;
-					cap=mc.getLevelCapAxes();
-				}
-				if(skill.equalsIgnoreCase("acro")||skill.equalsIgnoreCase("acrobatics")){
-					skilltype = SkillType.ACROBATICS;
-					cap=mc.getLevelCapAcrobatics();
-				}
-				if(skill.equalsIgnoreCase("fishing")){
-					skilltype = SkillType.FISHING;
-					cap=mc.getLevelCapFishing();
-				}
-				if(skill.equalsIgnoreCase("excavation")){
-					skilltype = SkillType.EXCAVATION;
-					cap=mc.getLevelCapExcavation();
-				}
-				if(skill.equalsIgnoreCase("mining")){
-					skilltype = SkillType.MINING;
-					cap=mc.getLevelCapMining();
-				}
-				if(skill.equalsIgnoreCase("herbalism")){
-					skilltype = SkillType.HERBALISM;
-					cap=mc.getLevelCapHerbalism();
-				}
-				if(skill.equalsIgnoreCase("repair")){
-					skilltype = SkillType.REPAIR;
-					cap=mc.getLevelCapRepair();
-				}
-				if(skill.equalsIgnoreCase("woodcutting")){
-					skilltype = SkillType.WOODCUTTING;
-					cap=mc.getLevelCapWoodcutting();
-				}
-				
-				if(skilltype == null) {
-					player.sendMessage(ChatColor.RED + skill + " is not a valid skill!");
-					return true;
+				else {
+                    player.sendMessage(ChatColor.RED + skillType + " is not a valid skill!");
+                    return true;
 				}
 				try {
 					Integer.parseInt(args[1]);
@@ -264,16 +226,16 @@ public class main extends JavaPlugin {
 					player.sendMessage(ChatColor.RED + "The amount must be a positive number!");
 					return true;
 				}
-				if(ExperienceAPI.getLevel(player, skilltype)+amount>cap) {
-					player.sendMessage(ChatColor.RED + "You have reached the maximum for " + skill);
+				if(ExperienceAPI.getLevel(player, skillType)+amount>cap) {
+					player.sendMessage(ChatColor.RED + "You have reached the maximum for " + skillType);
 					return true;
 				}
 				int newamount = oldamount-amount;
 				getConfig().set(player.getName() + ".credits", newamount);
 				saveConfig();
 				
-				ExperienceAPI.addLevel(player, skilltype, amount, true);
-				player.sendMessage(ChatColor.GREEN + "You have added " + ChatColor.GOLD + amount + ChatColor.GREEN +" credits to " + ChatColor.GOLD + skill + ChatColor.GREEN + ".");
+				ExperienceAPI.addLevel(player, skillType, amount);
+				player.sendMessage(ChatColor.GREEN + "You have added " + ChatColor.GOLD + amount + ChatColor.GREEN +" credits to " + ChatColor.GOLD + skillType + ChatColor.GREEN + ".");
 				return true;
 			} else {
 					player.sendMessage(ChatColor.RED + "Too many arguments!");

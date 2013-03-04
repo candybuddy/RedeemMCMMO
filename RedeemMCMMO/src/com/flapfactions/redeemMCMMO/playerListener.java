@@ -11,11 +11,11 @@ import org.bukkit.event.player.PlayerLoginEvent;
 
 public class playerListener implements Listener {
 	
-	public static main plugin;
+	public static RedeemMCMMO plugin;
 	
 	@EventHandler
 	public void onLogin(PlayerLoginEvent event) {
-		plugin = main.instance;
+		plugin = RedeemMCMMO.instance;
 		Player player = event.getPlayer();
 		File playerDat = new File("world/players/"+ player.getName() + ".dat");
 		if(!playerDat.exists()) {
@@ -32,7 +32,7 @@ public class playerListener implements Listener {
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
-		plugin = main.instance;
+		plugin = RedeemMCMMO.instance;
 		Player player = event.getPlayer();
 		int credits = plugin.getConfig().getInt(player.getName() + ".credits");
 		if(credits == 0) {

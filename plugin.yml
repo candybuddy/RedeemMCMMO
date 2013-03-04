@@ -1,10 +1,9 @@
 name: RedeemMCMMO
-main: com.flapfactions.redeemMCMMO.main
-version: 1.1.3
+main: com.flapfactions.redeemMCMMO.RedeemMCMMO
+version: 1.1.4
 author: Candybuddy
 description: A plugin that allows players to redeem MCMMO levels in any skill.
-depend: [Vault]
-depend: [mcMMO]
+softdepend: [Vault, mcMMO]
 commands:
   addcredits:
     description: Give a player credits towards MCMMO levels.
